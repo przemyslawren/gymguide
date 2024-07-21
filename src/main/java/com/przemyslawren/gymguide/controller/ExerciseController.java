@@ -1,5 +1,6 @@
 package com.przemyslawren.gymguide.controller;
 
+import com.przemyslawren.gymguide.dto.SimpleExerciseDto;
 import com.przemyslawren.gymguide.model.Exercise;
 import com.przemyslawren.gymguide.service.ExerciseService;
 import java.util.List;
@@ -17,7 +18,12 @@ public class ExerciseController {
 
     @GetMapping
     public List<Exercise> getAllExercises() {
-        return exerciseService.getExercises();
+        return exerciseService.getAllExercises();
+    }
+
+    @GetMapping("/simple")
+    public List<SimpleExerciseDto> getAllSimpleExercises() {
+        return exerciseService.getSimpleExercises();
     }
 
     @GetMapping("/{name}")

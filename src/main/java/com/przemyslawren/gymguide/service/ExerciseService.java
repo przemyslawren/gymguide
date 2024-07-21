@@ -1,35 +1,31 @@
 package com.przemyslawren.gymguide.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.przemyslawren.gymguide.dto.SimpleExerciseDto;
+import com.przemyslawren.gymguide.mapper.ExerciseMapper;
 import com.przemyslawren.gymguide.model.Exercise;
-import jakarta.annotation.PostConstruct;
-import java.io.IOException;
+import com.przemyslawren.gymguide.repository.ExerciseRepository;
+import java.util.ArrayList;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 @Getter
 @Service
+@AllArgsConstructor
 public class ExerciseService {
-    private List<Exercise> exercises;
-
-    @PostConstruct
-    public void init() {
-        try {
-            ClassPathResource resource = new ClassPathResource("exercises.json");
-            ObjectMapper objectMapper = new ObjectMapper();
-            exercises = objectMapper.readValue(resource.getInputStream(), new TypeReference<>() {});
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to read exercises.json", e);
-        }
-    }
+    private final ExerciseRepository exerciseRepository;
+    private final ExerciseMapper exerciseMapper;
 
     public Exercise getExerciseByName(String name) {
-        return exercises.stream()
-                .filter(exercise -> exercise.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+        return exerciseRepository.findExerciseByName(name);
+    }
+
+    public List<Exercise> getAllExercises() {
+        return new ArrayList<>(exerciseRepository.findAll());
+    }
+
+    public List<SimpleExerciseDto> getSimpleExercises() {
+        return exerciseRepository.findAll().stream().map(exerciseMapper::toDto).toList();
     }
 }
