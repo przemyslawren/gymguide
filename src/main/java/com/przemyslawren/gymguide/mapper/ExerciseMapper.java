@@ -3,7 +3,6 @@ package com.przemyslawren.gymguide.mapper;
 import com.przemyslawren.gymguide.dto.DetailExerciseDto;
 import com.przemyslawren.gymguide.dto.SimpleExerciseDto;
 import com.przemyslawren.gymguide.model.Exercise;
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

@@ -26,19 +26,15 @@ public class ExerciseService {
         Page<Exercise> page = exerciseRepository.findByNameContaining(name, pageable);
         List<SimpleExerciseDto> exerciseDtoList = page.map(exerciseMapper::toSimpleDto).getContent();
 
-        long total = page.getTotalElements();
         int totalPages = page.getTotalPages();
-
-        return new ExerciseGridDto(total, totalPages, exerciseDtoList);
+        return new ExerciseGridDto(totalPages, exerciseDtoList);
     }
 
     public ExerciseGridDto getAllExercises(Pageable pageable) {
         Page<Exercise> page = exerciseRepository.findAll(pageable);
         List<SimpleExerciseDto> exerciseDtoList = page.map(exerciseMapper::toSimpleDto).getContent();
 
-        long total = page.getTotalElements();
         int totalPages = page.getTotalPages();
-
-        return new ExerciseGridDto(total, totalPages, exerciseDtoList);
+        return new ExerciseGridDto(totalPages, exerciseDtoList);
     }
 }
