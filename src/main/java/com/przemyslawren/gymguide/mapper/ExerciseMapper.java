@@ -10,14 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class ExerciseMapper {
+    private final String imageUrl = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
 
     public SimpleExerciseDto toSimpleDto(Exercise exercise) {
-        final String imageUrl = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/";
+
         return new SimpleExerciseDto(
                 exercise.getId(),
                 exercise.getName(),
                 exercise.getPrimaryMuscles(),
-                exercise.getImages().stream().map(imageUrl::concat).collect(Collectors.toList()));
+                exercise.getImages().stream().map(imageUrl::concat).collect(Collectors.toList())
+        );
     }
 
     public DetailExerciseDto toDetailDto(Exercise exercise) {
@@ -33,7 +35,7 @@ public class ExerciseMapper {
                 exercise.getSecondaryMuscles(),
                 exercise.getInstructions(),
                 exercise.getCategory(),
-                exercise.getImages()
+                exercise.getImages().stream().map(imageUrl::concat).collect(Collectors.toList())
         );
     }
 }

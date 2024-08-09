@@ -10,4 +10,6 @@ public interface ExerciseRepository extends MongoRepository<Exercise, String> {
 
     @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
     Page<Exercise> findByNameContaining(String name, Pageable pageable);
+
+    Exercise findExerciseById(String id);
 }

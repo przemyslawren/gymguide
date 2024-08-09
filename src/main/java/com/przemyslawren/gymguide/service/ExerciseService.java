@@ -1,5 +1,6 @@
 package com.przemyslawren.gymguide.service;
 
+import com.przemyslawren.gymguide.dto.DetailExerciseDto;
 import com.przemyslawren.gymguide.dto.ExerciseGridDto;
 import com.przemyslawren.gymguide.dto.SimpleExerciseDto;
 import com.przemyslawren.gymguide.mapper.ExerciseMapper;
@@ -36,5 +37,11 @@ public class ExerciseService {
 
         int totalPages = page.getTotalPages();
         return new ExerciseGridDto(totalPages, exerciseDtoList);
+    }
+
+    public DetailExerciseDto getExercise(String id) {
+        Exercise exercise = exerciseRepository.findExerciseById(id);
+
+        return exerciseMapper.toDetailDto(exercise);
     }
 }

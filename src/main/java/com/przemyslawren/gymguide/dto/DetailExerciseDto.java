@@ -14,5 +14,5 @@ public record DetailExerciseDto(
         Set<String> secondaryMuscles,
         List<String> instructions,
         String category,
-        List<String> images
+        List<String> imagesURL
 ) {}
